@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/state_manager.dart';
-import 'package:shopizo/users/authentication/signup_screen.dart';
+import 'package:shopizo/users/authentication/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   var formkey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   var isObsecure = true.obs;
@@ -59,16 +60,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.fromLTRB(30, 30, 30, 8),
                       child: Column(
                         children: [
-                          // email
+
+                          // name 
                           TextFormField(
-                            controller: emailController,
+                            controller: nameController,
                             validator: (val) => val == "" ? "Please write email" : null,
                             decoration: InputDecoration(
                               prefixIcon: Icon(
                                 Icons.email,
                                 color: Colors.black,
                               ),
-                              hintText: "email......",
+                              hintText: "name",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
                                 borderSide: const BorderSide(
@@ -85,6 +87,33 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                            
                            SizedBox(height: 15,),
+
+                            TextFormField(
+                            controller: emailController,
+                            validator: (val) => val == "" ? "Please write email" : null,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.black,
+                              ),
+                              hintText: "Email",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: const BorderSide(
+                                  color: Colors.white60,
+                                ),                   
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 6,
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
                           // password 
                           Obx(
                             () =>
@@ -136,49 +165,30 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(30),
                               child: Padding(padding: EdgeInsets.symmetric(
                                 vertical: 10,horizontal: 10),
-                                child: Text("Login",style: TextStyle(color: Colors.white),),
+                                child: Text("SignUp",style: TextStyle(color: Colors.white),),
                                 ),
                               ), 
                             ),
 
 
-                            // don't have an account button -btn
+                            // Alredy have an account 
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Don't have an Account?"),
+                                Text("Alredy have an account"),
                                 TextButton(onPressed: (){
-                                  Get.to(SignupScreen());
+                                  Get.to(LoginScreen());
                                 },
-                                 child: const Text("Sign UP",
+                                 child: const Text("Login Here",
                                  style: TextStyle(
-                                  color: Colors.pinkAccent,
+                                  color: Colors.black,
                                  ),
                                  )
-                                 )
+                                 ),
                               ],
                             ),
                             SizedBox(height: 10,),
 
-                            Text("Or",
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                            ),
-                              // are you an account -button        
-                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Are you an Admin?"),
-                                TextButton(onPressed: (){},
-                                 child: const Text("Click Here",
-                                 style: TextStyle(
-                                  color: Colors.pinkAccent,
-                                 ),
-                                 )
-                                 )
-                              ],
-                            )
                           
                         ],
                       ),
